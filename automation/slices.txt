@@ -1,0 +1,21 @@
+# one focus area per line: label|description (used by bigrun.sh expand phase)
+japan|Japan: university-specific scholarships and English-taught funded master's/PhD, Japanese private foundations that fund foreign students (e.g. Sato Yo, Kyoto Univ foundations, corporate foundations), research internships, English-speaking engineering employers and graduate programs
+korea-taiwan-hk-china|South Korea, Taiwan, Hong Kong, China: university and government scholarships, research institutes with funded positions, internships, talent programs open to Indonesians
+sea|Singapore, Malaysia, Thailand, Brunei, Philippines, Vietnam: university scholarships, research positions, internships, regional programs (ASEAN, SEAMEO), jobs and visas relevant to Indonesian engineers
+middle-east|Middle East, Turkey and Central Asia: university-funded master's/PhD, fellowships, research internships, tech talent programs
+uk-ireland|UK and Ireland: university scholarships open to Indonesians, fully funded PhD studentships, research fellowships, tech talent programs
+dach|Germany, Austria, Switzerland: funded PhD and research positions, foundation scholarships, DAAD programs, research internships, institutes (Max Planck, Fraunhofer, Helmholtz, ETH domain)
+benelux-france-nordics|Netherlands, Belgium, France, Denmark, Sweden, Norway, Finland, Iceland: scholarships, paid PhD positions, excellence programs, research internships
+south-east-europe|Italy, Spain, Portugal, Poland, Czech Republic, Baltic states, Hungary, Slovenia, Greece and other European countries: scholarships, funded positions, government programs open to Indonesians
+north-america|United States and Canada: fellowships and funded master's/PhD open to international students, research internships, programs for Southeast Asians
+oceania|Australia and New Zealand: university research scholarships, institutional scholarships open to Indonesians, research internships, youth programs
+multilateral|Multilateral and foundation programs: World Bank, ADB, IsDB, UN agencies (young professionals, internships, volunteers), OPEC Fund, Aga Khan, Ford-like foundations, ASEAN and APEC programs open to Indonesians
+ai-robotics|AI, machine learning and robotics specific: fellowships, residencies, research programs, summer schools, labs and companies that hire internationally, robotics competitions and challenges
+open-source|Paid open source and developer programs: mentorships, grants, bounties, ambassador/student programs from tech companies and foundations, open source funds
+hackathons|Hackathons outside Indonesia and international online hackathons: in-person hackathons with travel reimbursement (e.g. Junction, ETHGlobal, HackZurich, TreeHacks-style events open to internationals), major online hackathons with large prizes (Devpost, Kaggle competitions, AI/LLM hackathons, NASA Space Apps, company-run global challenges), Asian and European hackathon series
+startups|Startup accelerators, founder fellowships, pre-seed programs, government startup programs and startup visas worldwide (Asia, Europe, Americas, Middle East) that accept Indonesian founders
+remote-companies|Specific remote-first or remote-friendly companies that hire software engineers from Indonesia or APAC (engineering roles), plus companies with Indonesia entities hiring for global teams
+remote-platforms|Remote job boards, freelance marketplaces, talent networks, AI-training work platforms and EOR-based hiring platforms usable from Indonesia
+conferences|Conferences, summits and summer schools that give travel grants or scholarships to Indonesians (tech, research, leadership, youth), including speaker and diversity grants
+youth-exchange|Exchange, leadership and young professional programs for Indonesians run by governments, embassies and foundations (short visits, fellowships, youth summits)
+visas|Work, talent, job-seeker, post-study, digital nomad and working-holiday-type visas worldwide relevant to Indonesian citizens, including new schemes from the last 2 years

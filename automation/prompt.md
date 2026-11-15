@@ -11,6 +11,9 @@ Today is {{TODAY}}. Work only inside this directory.
 2. **Re-verify {{RECHECK}} existing rows**, prioritising: rows with status `C`, then `V` rows whose `checked_on` is oldest.
    For each, confirm on the official site (or a reputable recent source) the current status, next deadline/window and key facts.
 
+3. **Add details for up to {{DETAILS}} rows that have none in `details.json`** (fit 3 first). Follow exactly the instructions in
+   `automation/enrich-prompt.md` for the format and rules (own words, no copied prose, checked_on = {{TODAY}}).
+
 ## Rules for editing `data.txt`
 - Read the header comments at the top of `data.txt` and follow the exact pipe-separated format with 10 fields.
 - Write everything in **English**. Never add personal information about anyone (no names of the reader's own projects or companies).
@@ -20,7 +23,7 @@ Today is {{TODAY}}. Work only inside this directory.
 - In `summary`, include concrete dates/amounts you verified, and say "expected"/"estimated" when a date is inferred.
 - If a program has ended, do not delete the row: start its summary with "DISCONTINUED (YYYY):" and set fit to 1.
 - `fit`: 3 = strong fit for software/AI/robotics engineering or founding, 2 = good fit, 1 = general.
-- Do not touch any other file except `automation/last-run.md`.
+- Do not touch any other file except `details.json` and `automation/last-run.md`.
 
 ## When done
 1. Run `python3 build.py`. If it prints INVALID DATA, fix `data.txt` and run it again until it prints OK.
