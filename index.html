@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>upgrade: opportunities abroad</title>
+<style>
+  :root { --bg:#fafaf9; --card:#fff; --text:#1c1917; --muted:#78716c; --line:#e7e5e4; --accent:#2563eb; --ok:#15803d; --warn:#b45309; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0c0a09; --card:#1c1917; --text:#f5f5f4; --muted:#a8a29e; --line:#292524; --accent:#60a5fa; --ok:#4ade80; --warn:#fbbf24; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--text); }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { margin: 0 0 4px; font-size: 26px; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  .controls { display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:8px; margin-bottom: 12px; }
+  @media (max-width: 720px) { .controls { grid-template-columns: 1fr 1fr; } .controls input { grid-column: 1 / -1; } }
+  input, select { width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--text); font:inherit; }
+  .meta { color:var(--muted); font-size:13px; margin: 0 0 12px; }
+  .list { display:grid; gap:10px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+  .top { display:flex; justify-content:space-between; gap:12px; align-items:baseline; flex-wrap:wrap; }
+  .name { font-weight:600; font-size:16px; color:var(--accent); text-decoration:none; }
+  .name:hover { text-decoration:underline; }
+  .fit { color:#eab308; letter-spacing:1px; white-space:nowrap; }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0; font-size:12px; }
+  .tag { border:1px solid var(--line); border-radius:999px; padding:1px 8px; color:var(--muted); }
+  .ok { color:var(--ok); border-color:currentColor; }
+  .warn { color:var(--warn); border-color:currentColor; }
+  .summary { margin:4px 0 0; }
+  .window { color:var(--muted); font-size:13px; margin-top:4px; }
+  .empty { color:var(--muted); text-align:center; padding:40px; }
+  footer { margin-top:28px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>upgrade</h1>
+  <p class="sub">Scholarships, fellowships, research internships, talent visas, working holidays, remote work, startup programs and grants for an Indonesian software / AI / robotics engineer.</p>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search: robotics, Japan, PhD, remote, no return bond..." autocomplete="off">
+    <select id="cat"><option value="">All categories</option></select>
+    <select id="status">
+      <option value="">Any status</option>
+      <option value="V">✅ Verified</option>
+      <option value="C">⚠️ Needs check</option>
+    </select>
+    <select id="fit">
+      <option value="">Any fit</option>
+      <option value="3">★★★ only</option>
+      <option value="2">★★ and up</option>
+    </select>
+  </div>
+  <p class="meta" id="meta">Loading…</p>
+  <div class="list" id="list"></div>
+
+  <footer>
+    ✅ verified on the web (date shown) · ⚠️ from general knowledge, always confirm on the official link before applying.
+    See the <a href="https://github.com/altamisatmaja/upgrade#readme">guide &amp; calendar</a> ·
+    <a href="opportunities.csv">download CSV</a>
+  </footer>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let DATA = { rows: [] };
+
+function render() {
+  const words = $('q').value.toLowerCase().split(/\s+/).filter(Boolean);
+  const cat = $('cat').value, st = $('status').value, fit = +$('fit').value || 0;
+  const rows = DATA.rows.filter(r => {
+    if (cat && r.category !== cat) return false;
+    if (st && r.status !== st) return false;
+    if (fit && +r.fit < fit) return false;
+    const hay = [r.name, r.country, r.type, r.summary, r.window, r.category].join(' ').toLowerCase();
+    return words.every(w => hay.includes(w));
+  }).sort((a, b) => b.fit - a.fit || (b.status === 'V') - (a.status === 'V') || a.name.localeCompare(b.name));
+
+  $('meta').textContent = `${rows.length} of ${DATA.total} entries · ${DATA.verified} verified · last updated ${DATA.updated}`;
+  $('list').innerHTML = rows.length ? rows.map(r => `
+    <article class="card">
+      <div class="top">
+        <a class="name" href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.name)}</a>
+        <span class="fit" title="Fit">${'★'.repeat(+r.fit)}${'☆'.repeat(3 - r.fit)}</span>
+      </div>
+      <div class="tags">
+        <span class="tag">${esc(r.category)}</span>
+        <span class="tag">${esc(r.country)}</span>
+        <span class="tag">${esc(r.type)}</span>
+        ${r.status === 'V' ? `<span class="tag ok">✅ verified ${esc(r.checked_on)}</span>` : `<span class="tag warn">⚠️ needs check</span>`}
+      </div>
+      <p class="summary">${esc(r.summary)}</p>
+      <div class="window">Window: ${esc(r.window)}</div>
+    </article>`).join('') : '<p class="empty">Nothing matches. Try fewer words.</p>';
+}
+
+fetch('data.json').then(r => r.json()).then(d => {
+  DATA = d;
+  [...new Set(d.rows.map(r => r.category))].forEach(c => $('cat').insertAdjacentHTML('beforeend', `<option>${esc(c)}</option>`));
+  ['q', 'cat', 'status', 'fit'].forEach(id => $(id).addEventListener('input', render));
+  render();
+}).catch(() => { $('meta').textContent = 'Could not load data.json. If you opened this file directly, run: python3 -m http.server'; });
+</script>
+</body>
+</html>

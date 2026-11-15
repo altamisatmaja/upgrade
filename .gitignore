@@ -1,0 +1,4 @@
+automation/update.log
+automation/launchd.log
+__pycache__/
+.DS_Store
