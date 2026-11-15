@@ -29,7 +29,7 @@ fi
 git pull --rebase --quiet >>"$LOG" 2>&1 || { log "git pull failed"; notify "Update failed: git pull"; exit 1; }
 
 PROMPT="$(sed -e "s/{{TODAY}}/$TODAY/g" -e "s/{{NEW}}/$NEW/g" -e "s/{{RECHECK}}/$RECHECK/g" automation/prompt.md)"
-claude -p "$PROMPT" \
+"${UPGRADE_CLAUDE_BIN:-claude}" -p "$PROMPT" \
   --allowedTools "WebSearch" "WebFetch" "Read" "Edit" "Write" "Glob" "Grep" "Bash(python3 build.py)" \
   --max-budget-usd "$BUDGET" >>"$LOG" 2>&1
 RC=$?
